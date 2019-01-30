@@ -1,0 +1,33 @@
+<script>
+ alert("Think of a number between 1 and 100. I will try to guess it and you can enter <,>, or yes.")
+ 
+ response = "Programming is not fun! But it is not all bad."
+ lowerlimit = 0
+ upperlimit = 100
+ 
+ while (response != "yes") {
+   
+ if ((upperlimit - lowerlimit) % 2 == 0) {
+    guess = (((upperlimit - lowerlimit) / 2) + lowerlimit) 
+  }
+ else {
+    guess = ((((upperlimit - lowerlimit) + 1)/ 2) + lowerlimit) 
+  }
+  
+  response = prompt(guess)
+  
+ if (response == "yes") {
+	alert("I guessed it!")
+  }
+ else if (response == "<") {
+   upperlimit = guess
+   }
+   
+ else if (response == ">") {
+   lowerlimit = guess
+   }
+ else {
+   alert ("Please respond <, >, or yes !")
+   }
+   }
+</script>
