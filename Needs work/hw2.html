@@ -1,0 +1,22 @@
+<script>
+shift = prompt ("Enter the desired shift number. For example, a left shift would be negative and a right shift would be positive.")
+shift = parseInt(shift)%26
+text = prompt ("Enter the unencrypted text.")
+array = text.split("")
+encrypted = ""
+for ( i = 0; i < array.length; i++) { // Go through each element in the array (each character in the inputted string)
+     code = text.charCodeAt(i);
+	 if(code >= 65 && code <= 90) {
+	 shifted = code + shift
+		}
+	 else if (code >= 97 && code <= 122) {
+		shifted = code + shift
+		}
+	 else{
+	 shifted = code //character not a letter so it is not shifted, but the ASCII code is stored for conversion later
+	 }
+	encrypted += String.fromCharCode(shifted);
+}
+alert (encrypted)
+
+</script>

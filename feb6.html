@@ -1,0 +1,30 @@
+<p>Input:<br><textarea id="input" rows="10" cols="80"></textarea>
+<p><button onclick="process()">Process</button>
+<p>Output:<br><textarea id="output" rows="10" cols="80"></textarea>
+
+<script src="https://linguatorium.com/tools/static/320/english_words.js"></script>
+  
+<script>
+
+function process() {
+  x = document.getElementById("input").value
+  words = x.split(" ")
+  y = "Here are the words that you have misspelled:"
+  for (i=0; i<words.length; i++) {
+    current_word = words[i]
+    word_misspelled = true
+    for (j=0; english_words.length; j++) {
+      if (english_words[j] === current_word) {
+        word_misspelled = false
+      }
+    }
+    if (word_misspelled) {
+      y = y + "\nYou have misspelled word "+current_word
+    }
+  }
+  document.getElementById("output").value = y
+}
+
+</script>
+
+</script>
