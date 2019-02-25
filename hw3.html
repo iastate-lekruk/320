@@ -1,0 +1,45 @@
+<p>Input:<br><textarea id="input" rows="10" cols="80"></textarea>
+<p><button onclick="process()">Process</button>
+<p>Output:<br><textarea id="output" rows="10" cols="80"></textarea>
+
+<script src="https://linguatorium.com/tools/static/320/tau.js"></script>
+<script src="https://linguatorium.com/tools/static/320/grammar.js"></script>
+
+<script>
+function process() 
+{
+  x = document.getElementById("input").value
+  words = x.split(" ");
+  output = "";
+  for(i=0; i<words.length;i++)
+  {
+  		if((words[i] == 'a' || words[i] == 'A') && (i+1) < words.length)
+  		{	
+  		firstLetter = words[i+1].charAt(0);
+  			if(firstLetter == 'a' || firstLetter == 'e' || firstLetter == 'i' || firstLetter == 'o' || firstLetter == 'u' ||
+  			   firstLetter == 'A' || firstLetter == 'E' || firstLetter == 'I' || firstLetter == 'O' || firstLetter == 'U')
+  			{
+  			words[i] = words[i] + 'n'
+  			}
+  			output = output + ' ' + words[i];
+  				
+  		}
+  		else if((words[i] == 'an' || words[i] == 'An')  && (i+1) < words.length)
+  		{
+  		firstLetter = words[i+1].charAt(0);
+  			if(firstLetter != 'a' && firstLetter != 'e' && firstLetter != 'i' && firstLetter != 'o' && firstLetter != 'u' &&
+  			   firstLetter != 'A' && firstLetter != 'E' && firstLetter != 'I' && firstLetter != 'O' && firstLetter != 'U')
+  			{
+  			words[i] = words[i].charAt(0);
+  			}
+  			
+  			output = output + ' ' + words[i];
+  		}
+  		else
+  		{
+  		output = output + ' ' + words[i];
+  		}   
+  }
+  document.getElementById("output").value = output
+}
+</script>
