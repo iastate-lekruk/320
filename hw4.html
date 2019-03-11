@@ -1,0 +1,84 @@
+<script>
+var exercises = 
+    {in: ["The horse is ____the stable.",
+          "The dog is ______ the dog house.",
+          "The kitten is _____ the house.",
+          "The chicken is _____ the coop.",
+          "The duck is _____ the box."],
+    by:  ["The cake was made _____ Jamie.",
+          "The comment was made _______ Sara",
+          "The painting was painted ______ Amanda",
+          "A delicious meal was cooked ________ her mother.",
+          "The mess was made _______ a dog."],
+    to:  ["I am going _____ the store.",
+          "She went _____ the game.",
+          "Will you go ______ the party?.",
+          "Grace traveled _____ Hawaii for the winter.",
+          "The duck went ______ the pond."],
+    for: ["I bought the gift ______ you",
+           "She made the cookies _______ him.",
+           "Daniel painted the picture ______ Amanda's birthday.",
+           "We decorate ______ Christmas.",
+           "Timothy created _____ for her."],
+    after: ["________ the exam, the students were much happier.",
+            "James was happy ______ he recieved an A.",
+            "Martha wanted to travel ______ her best friend recounted her own trip.",
+            "Eloise liked the recipe ______ she tried it.",
+            "______ the party, they were all sunburned."]}
+var answers =
+    {in: ["The horse is ____ the stable.",
+          "The dog is ______ the dog house.",
+          "The kitten is _____ the house.",
+          "The chicken is _____ the coop.",
+          "The duck is _____ the box."],
+    by:  ["The cake was made _____ Jamie.",
+          "The comment was made _______ Sara.",
+          "The painting was painted ______ Amanda.",
+          "A delicious meal was cooked ________ her mother.",
+          "The mess was made _______ a dog."],
+    to:  ["I am going _____ the store.",
+          "She went _____ the game.",
+          "Will you go ______ the party?.",
+          "Grace traveled _____ Hawaii for the winter.",
+          "The duck went ______ the pond."],
+    for: ["I bought the gift ______ you",
+           "She made the cookies _______ him.",
+           "Daniel painted the picture ______ Amanda's birthday.",
+           "We decorate ______ Christmas.",
+           "Timothy created _____ for her."],
+    after: ["________ the exam, the students were much happier.",
+            "James was happy ______ he recieved an A.",
+            "Martha wanted to travel ______ her best friend recounted her own trip.",
+            "Eloise liked the recipe ______ she tried it.",
+            "______ the party, they were all sunburned."]}
+var preps = ['in','by','to','for','after']
+var copy_preps = preps
+var counts = {'in':0, 'by':0, 'to':0, 'for':0, 'after':0}
+while (true) {
+    var i = parseInt(Math.random()*preps.length) 
+    var random_prep = exercises[preps[i]]
+    var j = parseInt(Math.random()*Object.keys(random_prep).length)
+    var random_ex = random_prep[j]
+    var response = prompt(random_ex)
+    if (response.toLowerCase() === preps[i]) {
+        alert('Correct!')
+        counts[preps[i]]+=1
+    } else {
+        alert(answers[preps[i]][j])
+        counts[preps[i]] -= 1
+    }
+    var counts_values = []
+    for (k=0; k<copy_preps.length; k++) {
+        counts_values.push(counts[copy_preps[k]])
+    }
+    var duplicate_scores = []
+    var duplicate_preps = []
+    for (k=0; k<copy_preps.length; k++) {
+        if (counts_values[k] == Math.min(...counts_values)) {
+            duplicate_scores.push(counts_values[k])
+            duplicate_preps.push(copy_preps[k])
+        }
+    }
+    preps = duplicate_preps
+}
+</script>
