@@ -1,0 +1,206 @@
+var parseString = require('xml2js').parseString;
+var fs = require("fs");
+var xml = fs.readFileSync("C:\\Users\\horse\\Desktop\\320cFinalProject\\gothic-nt.xml", 'utf8');
+
+var posDict = 
+	{"A-": "adjective", 
+	"Df": "adverb", 
+	"S-": "article", 
+	"Ma": "cardinal numeral", 
+	"Nb": "common noun",
+	"C-": "conjunction",
+	"Pd": "demonstrative pronoun",
+	"F-": "foreign word",
+	"Px": "indefinite pronoun",
+	"N-": "infinitive marker",
+	"I-": "interjection",
+	"Du": "interrogative adverb",
+	"Pi": "interrogative pronoun",
+	"Mo": "ordinal numeral",
+	"Pp": "personal pronoun",
+	"Pk": "personal reflexive pronoun",
+	"Ps": "possessive pronoun",
+	"Pt": "possessive reflexive pronoun",
+	"R-": "preposition",
+	"Ne": "proper noun",
+	"Py": "quantifier",
+	"Pc": "reciprocal pronoun",
+	"Dq": "relative adverb",
+	"Pr": "relative pronoun",
+	"G-": "subjunction",
+	"V-": "verb",
+	"X-": "unassigned"
+	}
+	
+var morph1Dict = 
+	{"1": "first person",
+	"2": "second person",
+	"3": "third person",
+	"x": "uncertain person"
+	}
+	
+var morph2Dict = 
+	{"s": "singular",
+	"d": "dual",
+	"p": "plural",
+	"x": "uncertain number"
+	}
+
+var morph3Dict = 
+	{"p": "present",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+	"i": "imperfect",
+	"r": "perfect",
+	"s": "resultative",
+	"a": "aorist", 
+	"u": "past",
+	"l": "pluperfect",
+	"f": "future",
+	"t": "future perfect",
+	"x": "uncertain tense"
+	}
+	
+var morph4Dict = 
+	{"i": "indicative",
+	"s": "subjunctive",
+	"m": "imperative",
+	"o": "optative",
+	"n": "infinitive",
+	"p": "participle",
+	"d": "gerund",
+	"g": "gerundive",
+	"u": "supine",
+	"x": "uncertain mood",
+	"y": "finiteness unspecified",
+	"e": "indicative or subjunctive",
+	"f": "indicative or imperative",
+	"h": "subjunctive or imperative",
+	"t": "finite"
+	}
+	
+var morph5Dict = 
+	{"a": "active",
+	"m": "middle",
+	"p": "passive",
+	"e": "middle or passive",
+	"x": "unspecified"
+	}
+	
+var morph6Dict = 
+	{"m": "masculine",
+	"f": "feminine",
+	"n": "neuter",		
+	"p": "masculine or feminine",
+	"o": "masculine or neuter",
+	"r": "feminine or neuter",
+	"q": "masculine, feminine, or neuter",
+	"x": "uncertain gender"
+	}
+		
+var morph7Dict = 
+	{"n": "nominative",
+	"a": "accusative",
+	"o": "oblique",
+	"g": "genitive",
+	"c": "genitive or dative",
+	"e": "accusative or dative",
+	"d": "dative",
+	"b": "ablative",
+	"i": "instrumental",
+	"l": "locative",
+	"v": "vocative",
+	"x": "uncertain case",
+	"z": "no case"
+	}
+		
+var morph8Dict = 
+	{"p": "positive",
+	"c": "comparative",
+	"s": "superlative",
+	"x": "uncertain degree",
+	"z": "no degree"
+	}
+		
+var morph9Dict = 
+	{"w": "weak",
+	"s": "strong",
+	"t": "weak or strong"
+	}
+	
+var morph10Dict = 
+	{"n": "non-inflecting",
+	"i": "inflecting"
+	}
+
+	function getMorph(input){
+	var arrayofsplit = String(input).split("")
+	morphologyString = ""
+	for(i=0; i<arrayofsplit.length; i++){
+		if(i == 0 && arrayofsplit[i] != "-"){
+			morphologyString += "            " + morph1Dict[arrayofsplit[i]] + "\n"
+		}
+		if(i == 1 && arrayofsplit[i] != "-"){
+			morphologyString += "            " + morph2Dict[arrayofsplit[i]] + "\n"
+		}
+		if(i == 2 && arrayofsplit[i] != "-"){
+			morphologyString += "            " + morph3Dict[arrayofsplit[i]] + "\n"
+		}
+		if(i == 3 && arrayofsplit[i] != "-"){
+			morphologyString += "            " + morph4Dict[arrayofsplit[i]] + "\n"
+		}
+		if(i == 4 && arrayofsplit[i] != "-"){
+			morphologyString += "            " + morph5Dict[arrayofsplit[i]] + "\n"
+		}
+		if(i == 5 && arrayofsplit[i] != "-"){
+			morphologyString += "            " + morph6Dict[arrayofsplit[i]] + "\n"
+		}
+		if(i == 6 && arrayofsplit[i] != "-"){
+			morphologyString += "            " + morph7Dict[arrayofsplit[i]] + "\n"
+		}
+		if(i == 7 && arrayofsplit[i] != "-"){
+			morphologyString += "            " + morph8Dict[arrayofsplit[i]] + "\n"
+		}
+		if(i == 8 && arrayofsplit[i] != "-"){
+			morphologyString += "            " + morph9Dict[arrayofsplit[i]] + "\n"
+		}
+		if(i == 9 && arrayofsplit[i] != "-"){
+			morphologyString += "            " + morph10Dict[arrayofsplit[i]] + "\n"
+		}
+	} 
+	morphologyString = morphologyString.substr(12)
+	return morphologyString
+	}
+	
+	parseString(xml, function (err, result) {
+	let outputGothic = ""
+	let source = result.proiel.source
+	for (i = 0; i<source.length; i++) {
+		let el = source[i]
+		if (el.$.id === 'gothic-nt') {
+			for (j =0; j<el.div.length; j++) {
+				let sentences = el.div[j].sentence;
+				for (z = 0; z < sentences.length; z++) {
+					let sentence = sentences[z]
+					let tokens = sentence.token
+					if (!tokens) continue;
+					for (k = 0; k<tokens.length; k++) {
+						let token = tokens[k]
+						let word = token["$"]["form"]
+						let citation = token["$"]["citation-part"]
+						let lemma = token["$"]["lemma"]
+						let POS = posDict[token["$"]["part-of-speech"]]
+						let morphology = getMorph([token["$"]["morphology"]])
+						if (!word) continue;
+						let output = "\nCitation: " + citation + "\nForm: " + word + "\nLemma: " + lemma + "\nPart of Speech: " + POS + "\nMorphology: " + morphology + "\n";
+						outputGothic+=(output);
+					}
+				}
+			}
+		}
+	}
+	fs.writeFile("output_gothic.txt", outputGothic, (err) => {
+	if (err) console.log(err);
+		console.log("Successfully written to file.");
+	});
+});
+
+
